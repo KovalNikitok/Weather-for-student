@@ -7,12 +7,10 @@
     android:background="@color/homework_color"
     tools:context=".SelectCityActivity">
 
-
     <EditText
         android:id="@+id/selectCityName"
-        android:layout_width="320dp"
+        android:layout_width="280dp"
         android:layout_height="60dp"
-        android:autofillHints="Омск"
         android:background="@drawable/edit_text_rounded"
         android:ems="25"
         android:hint="@string/select_city_text"
@@ -21,41 +19,29 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textSize="20sp"
+        android:textColor="#1086ff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintHorizontal_bias="0.20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
 
     <Button
         android:id="@+id/okButton"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="60dp"
         android:background="@drawable/edit_text_button"
         android:text="@string/ok_text"
         android:textColor="#1086ff"
         app:layout_constraintBottom_toBottomOf="@+id/selectCityName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.874"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/selectCityName"
         app:layout_constraintTop_toTopOf="@+id/selectCityName"
         app:layout_constraintVertical_bias="0.04" />
 
-    <TextView
-        android:id="@+id/feelsLike"
-        android:layout_width="182dp"
-        android:layout_height="35dp"
-        android:gravity="start"
-        android:textAlignment="textStart"
-        android:textColor="#ffffff"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.774" />
+
 
     <TextView
         android:id="@+id/windInfoText"
@@ -66,12 +52,12 @@
         android:textAlignment="textStart"
         android:textColor="#aabcd5"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintBottom_toTopOf="@+id/windInfo"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/windInfo"
@@ -82,11 +68,11 @@
         android:textColor="#ffffff"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.774" />
+        app:layout_constraintVertical_bias="0.773" />
 
     <TextView
         android:id="@+id/humidityInfo"
@@ -97,7 +83,7 @@
         android:textColor="#ffffff"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -112,59 +98,77 @@
         android:textAlignment="textStart"
         android:textColor="#aabcd5"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintBottom_toTopOf="@+id/humidityInfo"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.877" />
+        app:layout_constraintVertical_bias="1.0" />
+    <TextView
+        android:id="@+id/feelsLike"
+        android:layout_width="182dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="start"
+        android:textAlignment="textStart"
+        android:textColor="#ffffff"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/windInfo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.772" />
 
     <TextView
         android:id="@+id/feelsLikeInfoText"
-        android:layout_width="177dp"
+        android:layout_width="145dp"
         android:layout_height="28dp"
         android:gravity="start"
         android:text="@string/feels_like_text"
         android:textAlignment="textStart"
         android:textColor="#aabcd5"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintBottom_toTopOf="@+id/feelsLike"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/pressureInfo"
         android:layout_width="182dp"
         android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:gravity="start"
         android:textAlignment="textStart"
         android:textColor="#ffffff"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/humidityInfo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.926" />
 
     <TextView
         android:id="@+id/pressureInfoText"
-        android:layout_width="177dp"
+        android:layout_width="145dp"
         android:layout_height="28dp"
         android:gravity="start"
         android:text="@string/pressure_text"
         android:textAlignment="textStart"
         android:textColor="#aabcd5"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintBottom_toTopOf="@+id/pressureInfo"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.877" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/weatherImage"

@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -30,8 +31,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-    private String cName,
-            imgID;
+    private String imgID;
 
     private double tempChange,
             feelsTempChange,
@@ -68,11 +68,14 @@ public class MainActivity extends AppCompatActivity {
         weatherImage = findViewById(R.id.weatherImage);
 
         Button btnCityChange = findViewById(R.id.buttonCityChange);
-        Button btnCelsius = findViewById(R.id.buttonCelsius);
-        Button btnFahrenheit = findViewById(R.id.buttonFarenheit);
+        final Button btnCelsius = findViewById(R.id.buttonCelsius);
+        final Button btnFahrenheit = findViewById(R.id.buttonFarenheit);
         Button btnGeolocation = findViewById(R.id.buttonGeoloc);
 
-        if(cName==null) {
+
+        Intent setName = getIntent();
+        String cName = setName.getStringExtra("getCityName");
+        if(cName ==null) {
             cName = "Омск";
         }
 
@@ -85,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if (responseCode != 404) {
+                        btnFahrenheit.setBackgroundResource(R.drawable.radius_right);
+                        btnFahrenheit.setTextColor(Color.parseColor("#aabcd5"));
+                        btnCelsius.setBackgroundResource(R.drawable.radius_left);
+                        btnCelsius.setTextColor(Color.parseColor("#ffffff"));
                         Picasso.with(v.getContext()).load(imgID).into(weatherImage);
                         DecimalFormat decimalFormat = new DecimalFormat("#.#");
                         temperature.setText(decimalFormat.format(tempChange).concat("°C"));
@@ -101,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if (responseCode != 404) {
+                        btnFahrenheit.setBackgroundResource(R.drawable.second_radius_right);
+                        btnFahrenheit.setTextColor(Color.parseColor("#ffffff"));
+                        btnCelsius.setBackgroundResource(R.drawable.second_radius_left);
+                        btnCelsius.setTextColor(Color.parseColor("#aabcd5"));
                         Picasso.with(v.getContext()).load(imgID).into(weatherImage);
                         DecimalFormat decimalFormat = new DecimalFormat("#.#");
                         temperature.setText(decimalFormat.format(getFarenheitTemperature(tempChange)).concat("°F"));
@@ -117,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if(lon>0.0&& lat>0.0) {
+                        btnFahrenheit.setBackgroundResource(R.drawable.radius_right);
+                        btnFahrenheit.setTextColor(Color.parseColor("#aabcd5"));
+                        btnCelsius.setBackgroundResource(R.drawable.radius_left);
+                        btnCelsius.setTextColor(Color.parseColor("#ffffff"));
                         DecimalFormat decimalFormat = new DecimalFormat("#.##");
                         System.out.println("lat= " + decimalFormat.format(lat) + "\nlon=" + decimalFormat.format(lon + 0.3));
                         getWeather(null,
@@ -139,9 +154,20 @@ public class MainActivity extends AppCompatActivity {
         btnCityChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getWeather(cName, 0, 0);
+                //отправляем информацию на вторую активность
+                Intent putIntent = new Intent(MainActivity.this, SelectCityActivity.class);
+                putIntent.putExtra("temp",temperature.getText().toString());
+                putIntent.putExtra("descr",weatherDescription.getText().toString());
+                putIntent.putExtra("feels_like",feelsLikeInfo.getText().toString());
+                putIntent.putExtra("windSpeed",windInfo.getText().toString());
+                putIntent.putExtra("humid",humidityInfo.getText().toString());
+                putIntent.putExtra("press",pressureInfo.getText().toString());
+                putIntent.putExtra("img",imgID);
+
+                startActivity(putIntent);
             }
         });
+
     }
 
     //трансформация °C в °F
@@ -149,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
         i=(32.0 + 1.8*i);
         return i;
     }
+
+
     //запрос на получение json, его обработка и установка полученных значений в TextView's
     public void getWeather(String nameOfCity, double lat, double lon){
         String URL;
@@ -222,8 +250,6 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jr);
     }
-
-
 
     //Работа с геолокацией, запрос на получение доступа к геолокации и получениее lat, lon
     final int PERMISSION_REQUEST = 1;
